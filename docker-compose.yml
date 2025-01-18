@@ -1,0 +1,70 @@
+version: "3.3"
+services:
+  web:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    command: python manage.py runserver 0.0.0.0:8001
+    depends_on:
+      - redis
+      - db
+    restart: always
+    networks:
+      - default
+
+  redis:
+    image: "redis:alpine"
+    restart: always
+    networks:
+      - default
+
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    command: celery -A tinderBot worker --loglevel=info
+    depends_on:
+      - redis
+      - web
+      - db
+    restart: always
+    networks:
+      - default
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    command: celery -A tinderBot beat --loglevel=info
+    depends_on:
+      - redis
+      - web
+      - db
+    restart: always
+    networks:
+      - default
+
+  db:
+    image: postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=tinderbot
+      - POSTGRES_USER=tinderbot
+      - POSTGRES_PASSWORD=tinderbot@123
+    ports:
+      - "5432:5432"
+    restart: always
+    networks:
+      - default
+
+networks:
+  default:
+    external:
+      name: tinderbot
