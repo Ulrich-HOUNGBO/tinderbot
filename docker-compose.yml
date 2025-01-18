@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
-    command: celery -A tinderBot worker --loglevel=info
+    command: celery -A tinderbot worker --loglevel=info
     depends_on:
       - redis
       - web
@@ -41,7 +41,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/app
-    command: celery -A tinderBot beat --loglevel=info
+    command: celery -A tinderbot beat --loglevel=info
     depends_on:
       - redis
       - web

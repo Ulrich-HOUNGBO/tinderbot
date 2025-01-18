@@ -10,7 +10,11 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-
+        migrations.AddField(
+            model_name="account",
+            name="timezone_field",
+            field=models.CharField(blank=True, max_length=255, null=True),
+        ),
         migrations.AlterField(
             model_name="account",
             name="title",
