@@ -1,51 +1,34 @@
-"""
-URL configuration for tinderbot project.
+from django.urls import path, include
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+schema_view = get_schema_view(
+    openapi.Info(
+        title="TINDER BOT API",
+        default_version="v1.2",
+        description="Welcome to TINDER BOT API Project",
+        terms_of_service="",
+        contact=openapi.Contact(email="info@serviceloop.co"),
+        license=openapi.License(name=""),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
-# from django.contrib import admin
-from django.urls import path
 
 urlpatterns = [
-    path("create-bot-settings/", BotSettingsView.as_view({"patch": "create_settings"})),
     path(
-        "get-settings",
-        BotSettingsView.as_view({"get": "get_settings"}),
+        "docs/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="schema-swagger-ui",
     ),
-    path(
-        "get-settings-strategy/<uuid:strategy_id>",
-        BotSettingsView.as_view({"get": "get_settings_strategy"}),
-    ),
-    path(
-        "update-bot-settings/<uuid:bot_settings_id>",
-        BotSettingsView.as_view({"patch": "update_settings"}),
-    ),
-    path(
-        "delete-bot-settings/<uuid:bot_settings_id>",
-        BotSettingsView.as_view({"delete": "delete_settings"}),
-    ),
-    path(
-        "start-bot/<uuid:bot_settings_id>",
-        BotSettingsView.as_view({"patch": "start_bot"}),
-    ),
-    path(
-        "stop-bot/<uuid:bot_settings_id>",
-        BotSettingsView.as_view({"patch": "stop_bot"}),
-    ),
-    path(
-        "get-token/",
-        BotSettingsView.as_view({"get": "get_tinder_auth_token"}),
-    ),
+    path("", schema_view.with_ui("redoc", cache_timeout=0), name="schema-redoc"),
+    path("api/", include("users.urls")),
+    path("api/", include("bot.urls")),
+    path("api/", include("account.urls")),
+    path("api/", include("strategies.urls")),
+    path("api/", include("proxies.urls")),
+    path("api/", include("modeles.urls")),
+    path("api/", include("action.urls")),
 ]
