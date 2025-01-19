@@ -13,7 +13,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from mail.reset_password_mail import send_mail_template
-from tinderBot import settings
+from tinderbot import settings
 from users.models import User
 from users.serializers import UserSerializer, LoginSerializer, ChangePasswordSerializer, SendMailSerializer, \
     UserPasswordResetSerializer
