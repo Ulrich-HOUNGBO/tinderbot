@@ -42,6 +42,7 @@ CORS_ALLOW_HEADERS = (
     "x-requested-with",
 )
 
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
