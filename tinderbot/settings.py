@@ -25,7 +25,22 @@ SECRET_KEY = "django-insecure-2s7e3v@!&ns&rjx^chqmhr3a#af8ou9074ozc=z)z&6mtd@(ea
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://157.173.101.239:8001,",
+    "http://autodateswiper.com",
+]
+
+ALLOWED_HOSTS = ["*"]
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
 
 
 # Application definition
