@@ -27,8 +27,8 @@ DEBUG = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://157.173.101.239:8001,",
-    "http://autodateswiper.com",
+    "http://157.173.101.239:8001",
+    "https://autodateswiper.com",
 ]
 
 ALLOWED_HOSTS = ["*"]
