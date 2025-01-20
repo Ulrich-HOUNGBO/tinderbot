@@ -39,7 +39,7 @@ django-oauth2==4.2
 django-storages==1.14.3
 django-timezone-field==7.0
 djangorestframework~=3.15.1
-djangorestframework-simplejwt==5.3.1
+djangorestframework-simplejwt==5.4.0
 drf-spectacular==0.27.2
 drf-yasg==1.21.7
 drf-yasg2==1.19.4
@@ -47,8 +47,6 @@ drf_api_logger==1.1.15
 environ==1.0
 filelock==3.15.4
 fire==0.6.0
-Flask==3.0.3
-Flask-Cors==4.0.1
 flatbuffers==24.3.25
 frozenlist==1.4.1
 gast==0.6.0
