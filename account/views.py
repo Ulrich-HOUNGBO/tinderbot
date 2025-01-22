@@ -31,7 +31,7 @@ class AccountViews(viewsets.ModelViewSet):
             user = request.user.id
             request.data["user"] = user
 
-            if Account.objects.filter(name=request.data.get("title"), user=user).exists():
+            if Account.objects.filter(title=request.data.get("title"), user=user).exists():
                 return Response({"error": "You already have account with same name"}, status=status.HTTP_400_BAD_REQUEST)
 
             # Handle strategy validation
